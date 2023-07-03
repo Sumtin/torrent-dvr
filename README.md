@@ -26,19 +26,19 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 
 The following containers are used in this solution:
 
-| Service | Behind VPN? | Port | Official Docs |
-|---|:---:|:---:|---|
+| Service | Behind VPN? | Port | Purpose | Official Docs |
+|---|:---:|:---:|---|---|
 | ExpressVPN | N/A | N/A | https://github.com/polkaned/dockerfiles/tree/master/expressvpn |
-|WatchTower|No|N/A|https://github.com/containrrr/watchtower| 
-|qBittorrent|Yes|5555|https://docs.linuxserver.io/images/docker-qbittorrent|
-|Gatus|Yes|8080|https://github.com/TwiN/gatus|
-|Sonarr|No|8989|https://docs.linuxserver.io/images/docker-sonarr|
-|Radarr|No|7878|https://docs.linuxserver.io/images/docker-radarr|
-|Bazarr|No|6767|https://docs.linuxserver.io/images/docker-bazarr|
-|Jackett|No|9117|https://docs.linuxserver.io/images/docker-jackett|
-|Flaresolverr|No|8191|https://github.com/FlareSolverr/FlareSolverr|
-|OpenSpeedTest|Yes|3000|https://openspeedtest.com/|
-|OpenSpeedTest|No|3030|https://openspeedtest.com/|
+|WatchTower|No|N/A|Auto-updates for all containers|https://github.com/containrrr/watchtower| 
+|qBittorrent|Yes|5555|Bittorrent client|https://docs.linuxserver.io/images/docker-qbittorrent|
+|Gatus|Yes|8080|Health monitor|https://github.com/TwiN/gatus|
+|Sonarr|No|8989|Monitors TV shows|https://docs.linuxserver.io/images/docker-sonarr|
+|Radarr|No|7878|Monitors Movies|https://docs.linuxserver.io/images/docker-radarr|
+|Bazarr|No|6767|Auto-grabs subtitles|https://docs.linuxserver.io/images/docker-bazarr|
+|Jackett|No|9117|Adds support for torrent sites that don't support Torznab|https://docs.linuxserver.io/images/docker-jackett|
+|Flaresolverr|No|8191|Fix for torrent sites using CloudFlare proxy|https://github.com/FlareSolverr/FlareSolverr|
+|OpenSpeedTest|Yes|3000|Speed test behind VPN|https://openspeedtest.com/|
+|OpenSpeedTest|No|3030|Speed test not behind VPN|https://openspeedtest.com/|
 
 # Networking
 
