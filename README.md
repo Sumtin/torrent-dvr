@@ -24,7 +24,7 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 
 # What's Included?
 
-The following continers are used in this solution:
+The following containers are used in this solution:
 
 | Service | Behind VPN? | Port | Official Docs |
 |---|:---:|:---:|---|
