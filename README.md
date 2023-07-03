@@ -35,6 +35,7 @@ The following continers are used in this solution:
 - [Bazarr](https://docs.linuxserver.io/images/docker-bazarr)
 - [Jackett](https://docs.linuxserver.io/images/docker-jackett)
 - [Flaresolverr](https://github.com/FlareSolverr/FlareSolverr)
+- [OpenSpeedTest](https://openspeedtest.com/)
 
 # Networking
 
