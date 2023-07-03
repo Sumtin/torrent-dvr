@@ -46,8 +46,8 @@ services:
       - TZ=America/Toronto
       - WEBUI_PORT=5555
     volumes:
-      - /mnt/NAS/docker/volumes/dvr-vm:/config
-      - /mnt/NAS/btDownloads:/downloads # Update if mount is in different location
+      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}:/config
+      - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
     restart: unless-stopped    
     depends_on:
       - expressvpn
@@ -59,7 +59,7 @@ services:
     network_mode: container:expressvpn
     restart: always
     volumes:
-      - /mnt/NAS/docker/volumes/dvr-vm/gatus:/config
+      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/gatus:/config
     depends_on:
       - expressvpn
 
@@ -72,9 +72,9 @@ services:
       - PGID=1000
       - TZ=America/Toronto
     volumes:
-      - /mnt/NAS/docker/volumes/dvr-vm/sonarr:/config
-      - /mnt/NAS/TV:/tv # Update if mount is in different location
-      - /mnt/NAS/btDownloads:/downloads # Update if mount is in different location
+      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/sonarr:/config
+      - ${MOUNT_TO_TV}:/tv # Update if mount is in different location
+      - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -88,9 +88,9 @@ services:
       - PGID=1000
       - TZ=America/Toronto
     volumes:
-      - /mnt/NAS/docker/volumes/dvr-vm/radarr:/config
-      - /mnt/NAS/Movies:/movies # Update if mount is in different location
-      - /mnt/NAS/btDownloads:/downloads # Update if mount is in different location
+      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/radarr:/config
+      - ${MOUNT_TO_MOVIES}:/movies # Update if mount is in different location
+      - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -104,9 +104,9 @@ services:
       - PGID=1000
       - TZ=America/Toronto
     volumes:
-      - /mnt/NAS/docker/volumes/dvr-vm/bazarr:/config
-      - /mnt/NAS/Movies:/movies # Update if mount is in different location
-      - /mnt/NAS/TV:/tv # Update if mount is in different location
+      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/bazarr:/config
+      - ${MOUNT_TO_MOVIES}:/movies # Update if mount is in different location
+      - ${MOUNT_TO_TV}:/tv # Update if mount is in different location
     ports:
       - 6767:6767
     restart: unless-stopped
@@ -122,8 +122,8 @@ services:
       - AUTO_UPDATE=true #optional
       - RUN_OPTS= #optional
     volumes:
-      - /mnt/NAS/docker/volumes/dvr-vm/jackett:/config
-      - /mnt/NAS/btDownloads:/downloads
+      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/jackett:/config
+      - ${MOUNT_TO_BTDOWNLOADS}:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
