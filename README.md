@@ -38,7 +38,7 @@ The following continers are used in this solution:
 |Jackett|No|9117|https://docs.linuxserver.io/images/docker-jackett|
 |Flaresolverr|No|8191|https://github.com/FlareSolverr/FlareSolverr|
 |OpenSpeedTest|Yes|3000|https://openspeedtest.com/|
-|OpenSpeedTest|o|3030|https://openspeedtest.com/|
+|OpenSpeedTest|No|3030|https://openspeedtest.com/|
 
 # Networking
 
