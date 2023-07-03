@@ -1,16 +1,6 @@
 # Introduction
 Collection of secure deployments for torrent-based digital video recorders (DVR) for movies and TV shows.
 
-# Networking
-
-- Bittorrent and Gatus are routed through the ExpressVPN container to ensure privacy.  
-- There are two instances of OpenSpeedTest.  One behind VPN, the other not, so you can test performance.
-![image](https://github.com/Sumtin/torrent-dvr/assets/6676557/06efc94e-dedb-4ca3-90b4-585fa202c308)
-
-
-
-Currently uses default Docker network.
-
 # How to Use
 ## Docker Compose
 
@@ -45,6 +35,14 @@ The following continers are used in this solution:
 - [Bazarr](https://docs.linuxserver.io/images/docker-bazarr)
 - [Jackett](https://docs.linuxserver.io/images/docker-jackett)
 - [Flaresolverr](https://github.com/FlareSolverr/FlareSolverr)
+
+# Networking
+
+- Bittorrent and Gatus are routed through the ExpressVPN container to ensure privacy.  
+- There are two instances of OpenSpeedTest.  One behind VPN, the other not, so you can test performance.
+- Currently uses default Docker network.
+![image](https://github.com/Sumtin/torrent-dvr/assets/6676557/06efc94e-dedb-4ca3-90b4-585fa202c308)
+
 
 # Notes
 ## Why are Radarr and Sonarr volumes not mounted remotely?
