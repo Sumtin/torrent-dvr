@@ -8,7 +8,7 @@ services:
       - '/var/run/docker.sock:/var/run/docker.sock'
     environment:
       - WATCHTOWER_NOTIFICATIONS=shoutrrr
-      - 'WATCHTOWER_NOTIFICATION_URL=discord://${DISCORD_SERVER_KEY}'  # ** SECRET **
+      - 'WATCHTOWER_NOTIFICATION_URL=discord://${DISCORD_NOTIFICATION_SERVER_KEY}'  # ** SECRET **
       - 'WATCHTOWER_NOTIFICATION_TEMPLATE={{range .}}{{.Time.Format \2006-01-02'
     image: containrrr/watchtower
 
