@@ -1,0 +1,151 @@
+version: '3.9'
+
+services:
+  # Watchtower - Auto update all containers
+  watchtower:
+    container_name: watchtower
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    environment:
+      - WATCHTOWER_NOTIFICATIONS=shoutrrr
+      - 'WATCHTOWER_NOTIFICATION_URL=discord://${DISCORD_SERVER_KEY}'  # ** SECRET **
+      - 'WATCHTOWER_NOTIFICATION_TEMPLATE={{range .}}{{.Time.Format \2006-01-02'
+    image: containrrr/watchtower
+
+  # ExpressVPN - Must be amd64 arch.  Check out following for arm: https://hub.docker.com/r/misioslav/expressvpn
+  expressvpn:
+    container_name: expressvpn
+    image: polkaned/expressvpn
+    environment:
+      - ACTIVATION_CODE=${EXPRESSVPN_ACTIVATION_CODE} # ** SECRET **
+      - SERVER=smart
+    cap_add:
+      - NET_ADMIN
+    devices: 
+      - /dev/net/tun
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    privileged: true
+    restart: unless-stopped
+    # List ports for all containers that will route through this container
+    ports:
+      - 5555:5555      # qBittorrent WEBUI_PORT value
+      - 6881:6881      # qBittorrent default
+      - 6881:6881/udp  # qBittorrent default
+      - 8080:8080      # Gatus default
+  
+  # qBittorrent (routes through ExpressVPN)
+  bittorrent:
+    container_name: qbittorrent
+    image: lscr.io/linuxserver/qbittorrent:latest
+    network_mode: container:expressvpn
+    environment:
+      - PUID=1000
+      - PGID=1000\
+      - TZ=America/Toronto
+      - WEBUI_PORT=5555
+    volumes:
+      - /mnt/NAS/docker/volumes/dvr-vm:/config
+      - /mnt/NAS/btDownloads:/downloads # Update if mount is in different location
+    restart: unless-stopped    
+    depends_on:
+      - expressvpn
+
+  # Gatus (routes through ExpressVPN)
+  gatus:
+    container_name: gatus
+    image: twinproduction/gatus
+    network_mode: container:expressvpn
+    restart: always
+    volumes:
+      - /mnt/NAS/docker/volumes/dvr-vm/gatus:/config
+    depends_on:
+      - expressvpn
+
+  # Sonarr (TV)
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - /mnt/NAS/docker/volumes/dvr-vm/sonarr:/config
+      - /mnt/NAS/TV:/tv # Update if mount is in different location
+      - /mnt/NAS/btDownloads:/downloads # Update if mount is in different location
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  # Radarr (Movies)
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - /mnt/NAS/docker/volumes/dvr-vm/radarr:/config
+      - /mnt/NAS/Movies:/movies # Update if mount is in different location
+      - /mnt/NAS/btDownloads:/downloads # Update if mount is in different location
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  
+  # Bazarr (Subtitles for Movie and TV)
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - /mnt/NAS/docker/volumes/dvr-vm/bazarr:/config
+      - /mnt/NAS/Movies:/movies # Update if mount is in different location
+      - /mnt/NAS/TV:/tv # Update if mount is in different location
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+  
+  # Jackett (allows usenet bots like Sonarr and Radarr to use torrent sites) - Need to investigate Prowlarr
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS= #optional
+    volumes:
+      - /mnt/NAS/docker/volumes/dvr-vm/jackett:/config
+      - /mnt/NAS/btDownloads:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+
+  # Flaresolverr (only needed if torrent site behind CloudFlare proxy)
+  flaresolverr:
+    container_name: flaresolverr
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    ports:
+        - 8191:8191
+    environment:
+        - LOG_LEVEL=info
+    restart: unless-stopped
+
+  # Portainer - Nice GUI for Docker
+  # portainer-ce:
+  #   container_name: portainer
+  #   image: portainer/portainer-ce:latest
+  #   ports:
+  #     - 9000:9000
+  #     - 9443:9443 
+  #   restart: always
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - Portainer:/data
