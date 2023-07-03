@@ -72,7 +72,7 @@ services:
       - PGID=1000
       - TZ=America/Toronto
     volumes:
-      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/sonarr:/config
+      - Sonarr:/config
       - ${MOUNT_TO_TV}:/tv # Update if mount is in different location
       - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
     ports:
@@ -88,7 +88,7 @@ services:
       - PGID=1000
       - TZ=America/Toronto
     volumes:
-      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/radarr:/config
+      - Radarr:/config
       - ${MOUNT_TO_MOVIES}:/movies # Update if mount is in different location
       - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
     ports:
@@ -149,3 +149,7 @@ services:
   #   volumes:
   #     - /var/run/docker.sock:/var/run/docker.sock
   #     - Portainer:/data
+
+volumes:
+  Radarr:
+  Sonarr:
