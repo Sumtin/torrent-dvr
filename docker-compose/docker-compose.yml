@@ -35,7 +35,7 @@ services:
       - 6881:6881/udp  # qBittorrent default
       - 8080:8080      # Gatus default
       - 3000:3000      # OpenSpeedTest
-      
+
   # qBittorrent (routes through ExpressVPN)
   bittorrent:
     container_name: qbittorrent
@@ -148,7 +148,7 @@ services:
 
   speedtest-vpn:
       restart: never
-      container_name: openspeedtest
+      container_name: openspeedtest-vpn
       image: openspeedtest/latest      
       network_mode: container:expressvpn
       depends_on:
