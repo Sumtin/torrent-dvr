@@ -35,7 +35,7 @@ The following containers are used in this solution:
 |Sonarr|No|8989|Monitors TV shows|https://docs.linuxserver.io/images/docker-sonarr|
 |Radarr|No|7878|Monitors Movies|https://docs.linuxserver.io/images/docker-radarr|
 |Bazarr|No|6767|Auto-grabs subtitles|https://docs.linuxserver.io/images/docker-bazarr|
-|Jackett|No|9117|Torrent site 'translator' Sonarr/Radarr |https://docs.linuxserver.io/images/docker-jackett|
+|Jackett|No|9117|Torrent site 'translator' for Sonarr/Radarr |https://docs.linuxserver.io/images/docker-jackett|
 |Flaresolverr|No|8191|Fix for torrent sites using CloudFlare proxy|https://github.com/FlareSolverr/FlareSolverr|
 |OpenSpeedTest|Yes|3000|Speed test behind VPN|https://openspeedtest.com/|
 |OpenSpeedTest|No|3030|Speed test not behind VPN|https://openspeedtest.com/|
