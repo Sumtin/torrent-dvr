@@ -140,14 +140,14 @@ services:
     restart: unless-stopped
 
   speedtest:
-      restart: never
+      restart: no
       container_name: openspeedtest
       ports:
           - '3030:3030'
       image: openspeedtest/latest
 
   speedtest-vpn:
-      restart: never
+      restart: no
       container_name: openspeedtest-vpn
       image: openspeedtest/latest      
       network_mode: container:expressvpn
