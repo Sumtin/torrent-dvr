@@ -144,7 +144,7 @@ services:
       restart: no
       container_name: openspeedtest
       ports:
-          - '3000:3030'
+          - '3030:3000'
       image: openspeedtest/latest
 
   # OpenSpeedTest behind VPN
