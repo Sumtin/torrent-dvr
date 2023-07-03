@@ -34,7 +34,8 @@ services:
       - 6881:6881      # qBittorrent default
       - 6881:6881/udp  # qBittorrent default
       - 8080:8080      # Gatus default
-  
+      - 3000:3000      # OpenSpeedTest
+      
   # qBittorrent (routes through ExpressVPN)
   bittorrent:
     container_name: qbittorrent
@@ -137,6 +138,21 @@ services:
     environment:
         - LOG_LEVEL=info
     restart: unless-stopped
+
+  speedtest:
+      restart: never
+      container_name: openspeedtest
+      ports:
+          - '3030:3030'
+      image: openspeedtest/latest
+
+  speedtest-vpn:
+      restart: never
+      container_name: openspeedtest
+      image: openspeedtest/latest      
+      network_mode: container:expressvpn
+      depends_on:
+        - expressvpn   
 
   # Portainer - Nice GUI for Docker
   # portainer-ce:
