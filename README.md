@@ -1,6 +1,15 @@
 # Introduction
 Collection of secure deployments for torrent-based digital video recorders (DVR) for movies and TV shows.
 
+# Networking
+
+Bittorrent and Gatus are routed through the ExpressVPN container to ensure privacy.  
+![image](https://github.com/Sumtin/torrent-dvr/assets/6676557/06efc94e-dedb-4ca3-90b4-585fa202c308)
+
+There are two instances of OpenSpeedTest.  One behind VPN, the other not, so you can test performance.
+
+Currently uses default Docker network.
+
 # How to Use
 ## Docker Compose
 
