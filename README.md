@@ -28,7 +28,7 @@ The following containers are used in this solution:
 
 | Service | Behind VPN? | Port | Purpose | Official Docs |
 |---|:---:|:---:|---|---|
-| ExpressVPN | N/A | N/A | https://github.com/polkaned/dockerfiles/tree/master/expressvpn |
+| ExpressVPN | N/A | N/A | VPN container |https://github.com/polkaned/dockerfiles/tree/master/expressvpn |
 |WatchTower|No|N/A|Auto-updates for all containers|https://github.com/containrrr/watchtower| 
 |qBittorrent|Yes|5555|Bittorrent client|https://docs.linuxserver.io/images/docker-qbittorrent|
 |Gatus|Yes|8080|Health monitor|https://github.com/TwiN/gatus|
