@@ -26,16 +26,19 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 
 The following continers are used in this solution:
 
-- [ExpressVPN](https://github.com/polkaned/dockerfiles/tree/master/expressvpn)
-- [Watchtower](https://github.com/containrrr/watchtower)
-- [qBittorrent](https://docs.linuxserver.io/images/docker-qbittorrent)
-- [Gatus](https://github.com/TwiN/gatus)
-- [Sonarr](https://docs.linuxserver.io/images/docker-sonarr)
-- [Radarr](https://docs.linuxserver.io/images/docker-radarr)
-- [Bazarr](https://docs.linuxserver.io/images/docker-bazarr)
-- [Jackett](https://docs.linuxserver.io/images/docker-jackett)
-- [Flaresolverr](https://github.com/FlareSolverr/FlareSolverr)
-- [OpenSpeedTest](https://openspeedtest.com/)
+| Name | Behind VPN? | Port | Official Docs |
+|==|==|==|==|
+| ExpressVPN | N/A | https://github.com/polkaned/dockerfiles/tree/master/expressvpn |
+|WatchTower|No|N/A|https://github.com/containrrr/watchtower| 
+|qBittorrent|Yes|5555|https://docs.linuxserver.io/images/docker-qbittorrent|
+|Gatus|Yes|8080|https://github.com/TwiN/gatus|
+|Sonarr|No|8989|https://docs.linuxserver.io/images/docker-sonarr|
+|Radarr|No|7878|https://docs.linuxserver.io/images/docker-radarr|
+|Bazarr|No|6767|https://docs.linuxserver.io/images/docker-bazarr|
+|Jackett|No|9117|https://docs.linuxserver.io/images/docker-jackett|
+|Flaresolverr|No|8191|https://github.com/FlareSolverr/FlareSolverr|
+|OpenSpeedTest|Yes|3000|https://openspeedtest.com/|
+|OpenSpeedTest|o|3030|https://openspeedtest.com/|
 
 # Networking
 
