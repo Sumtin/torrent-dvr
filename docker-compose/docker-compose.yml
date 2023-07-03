@@ -139,6 +139,7 @@ services:
         - LOG_LEVEL=info
     restart: unless-stopped
 
+  # OpenSpeedTest no VPN
   speedtest:
       restart: no
       container_name: openspeedtest
@@ -146,6 +147,7 @@ services:
           - '3000:3030'
       image: openspeedtest/latest
 
+  # OpenSpeedTest behind VPN
   speedtest-vpn:
       restart: no
       container_name: openspeedtest-vpn
