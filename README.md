@@ -35,3 +35,8 @@ The following continers are used in this solution:
 - [Bazarr](https://docs.linuxserver.io/images/docker-bazarr)
 - [Jackett](https://docs.linuxserver.io/images/docker-jackett)
 - [Flaresolverr](https://github.com/FlareSolverr/FlareSolverr)
+
+# Notes
+## Why are Radarr and Sonarr volumes not mounted remotely?
+Sonarr and Radarr both use SQLite and it doesn't play nice when accessed over a network. 
+https://access.redhat.com/solutions/120733
