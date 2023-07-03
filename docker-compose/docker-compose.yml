@@ -143,13 +143,13 @@ services:
       restart: no
       container_name: openspeedtest
       ports:
-          - '3030:3030'
+          - '3030:3000'
       image: openspeedtest/latest
 
   speedtest-vpn:
       restart: no
       container_name: openspeedtest-vpn
-      image: openspeedtest/latest      
+      image: openspeedtest/latest
       network_mode: container:expressvpn
       depends_on:
         - expressvpn   
