@@ -27,7 +27,7 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 The following continers are used in this solution:
 
 | Service | Behind VPN? | Port | Official Docs |
-|--|--|--|--|
+|---|---|---|---|
 | ExpressVPN | N/A | N/A | https://github.com/polkaned/dockerfiles/tree/master/expressvpn |
 |WatchTower|No|N/A|https://github.com/containrrr/watchtower| 
 |qBittorrent|Yes|5555|https://docs.linuxserver.io/images/docker-qbittorrent|
