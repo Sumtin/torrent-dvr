@@ -10,7 +10,7 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 1. :warning: **Make sure ALL your mounts are properly mounted.**
 1. Run `docker compose up -d` OR install as Stack in Portainer
 
-## What's Included?
+# What's Included?
 
 The following continers are used in this solution:
 
