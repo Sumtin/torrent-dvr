@@ -15,9 +15,9 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 1. Open `Portainer -> Stacks -> Add Stack`
 2. Enter a Name (i.e. `torrent-dvr`)
 3. Click `Repository`
-4. Repository URL = `https://github.com/Sumtin/torrent-dvr/`
-5. Repo Reference = `refs/heads/main`
-6. Compose Path = `docker-compose/docker-compose.yml`
+   Repository URL = `https://github.com/Sumtin/torrent-dvr/`
+   Repo Reference = `refs/heads/main`
+   Compose Path = `docker-compose/docker-compose.yml`
 7. Under Environment Variables, select `Advanced Mode`
 8. Copy entire contents of [`/docker-compose/.env`](https://github.com/Sumtin/torrent-dvr/blob/main/docker-compose/.env) into text area.
 9. Update environment variables as needed
