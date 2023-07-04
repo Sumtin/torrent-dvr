@@ -13,7 +13,7 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 ## Portainer Stack
 
 1. Open `Portainer -> Stacks -> Add Stack`
-2. Enter a Name
+2. Enter a Name (i.e. `torrent-dvr`)
 3. Click `Repository`
 4. Repository URL = `https://github.com/Sumtin/torrent-dvr/`
 5. Repo Reference = `refs/heads/main`
