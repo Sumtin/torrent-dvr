@@ -32,15 +32,16 @@ The following containers are used in this solution:
 |---|:---:|:---:|---|---|
 | ExpressVPN | N/A | N/A | VPN container |https://github.com/polkaned/dockerfiles/tree/master/expressvpn |
 |WatchTower|No|N/A|Auto-updates containers|https://github.com/containrrr/watchtower| 
-|qBittorrent|Yes|5555|Bittorrent client|https://docs.linuxserver.io/images/docker-qbittorrent|
-|Gatus|Yes|8080|Health monitor|https://github.com/TwiN/gatus|
-|Sonarr|No|8989|Monitors TV shows|https://docs.linuxserver.io/images/docker-sonarr|
-|Radarr|No|7878|Monitors Movies|https://docs.linuxserver.io/images/docker-radarr|
-|Bazarr|No|6767|Auto-grabs subtitles|https://docs.linuxserver.io/images/docker-bazarr|
-|Jackett|No|9117|Torrent site 'translator' for Sonarr/Radarr |https://docs.linuxserver.io/images/docker-jackett|
-|Flaresolverr|No|8191|Fix for torrent sites using CloudFlare proxy|https://github.com/FlareSolverr/FlareSolverr|
 |OpenSpeedTest|Yes|3000|Speed test behind VPN|https://openspeedtest.com/|
 |OpenSpeedTest|No|3030|Speed test not behind VPN|https://openspeedtest.com/|
+|qBittorrent|Yes|5555|Bittorrent client|https://docs.linuxserver.io/images/docker-qbittorrent|
+|Bazarr|No|6767|Auto-grabs subtitles|https://docs.linuxserver.io/images/docker-bazarr|
+|Radarr|No|7878|Monitors Movies|https://docs.linuxserver.io/images/docker-radarr|
+|Gatus|Yes|8080|Health monitor|https://github.com/TwiN/gatus|
+|Flaresolverr|No|8191|Fix for torrent sites using CloudFlare proxy|https://github.com/FlareSolverr/FlareSolverr|
+|Sonarr|No|8989|Monitors TV shows|https://docs.linuxserver.io/images/docker-sonarr|
+|Jackett|No|9117|Torrent site 'translator' for Sonarr/Radarr |https://docs.linuxserver.io/images/docker-jackett|
+
 
 # Networking
 
