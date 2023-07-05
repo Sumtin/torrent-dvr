@@ -11,6 +11,7 @@ services:
       - 'WATCHTOWER_NOTIFICATION_URL=discord://${DISCORD_NOTIFICATION_SERVER_KEY}'  # ** SECRET **
       - 'WATCHTOWER_NOTIFICATION_TEMPLATE={{range .}}{{.Time.Format \2006-01-02'
     image: containrrr/watchtower
+    restart: unless-stopped
 
   # ExpressVPN - Must be amd64 arch.  Check out following for arm: https://hub.docker.com/r/misioslav/expressvpn
   expressvpn:
@@ -155,6 +156,26 @@ services:
       network_mode: container:expressvpn
       depends_on:
         - expressvpn   
+
+  # # Traefik reverse proxy
+  # reverse-proxy:
+  #   image: traefik:v2.10
+  #   # Enables the web UI and tells Traefik to listen to docker
+  #   command: --api.insecure=true --providers.docker
+  #   ports:
+  #     # The HTTP port
+  #     - "80:80"
+  #     # The Web UI (enabled by --api.insecure=true)
+  #     - "8080:8888"
+  #   volumes:
+  #     # So that Traefik can listen to the Docker events
+  #     - /var/run/docker.sock:/var/run/docker.sock
+
+  # # Traefix helper - A container that exposes an API to show its IP address
+  # whoami:
+  #   image: traefik/whoami
+  #   labels:
+  #     - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
 
   # Portainer - Nice GUI for Docker
   # portainer-ce:
