@@ -171,9 +171,9 @@ services:
     user: 1000:1000
     environment:
       - TZ=${TIMEZONE}
-      - AUTOBRR__LOG_PATH=${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/autobrr/logs
-      - AUTOBRR__LOG_MAX_SIZE=10 #MB
-      - AUTOBRR__LOG_MAX_BACKUPS=5
+      #- AUTOBRR__LOG_PATH=${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/autobrr/logs
+      #- AUTOBRR__LOG_MAX_SIZE=10 #MB
+      #- AUTOBRR__LOG_MAX_BACKUPS=5
     volumes:
       - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/autobrr/config:/config
     ports:
