@@ -45,7 +45,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000\
-      - TZ=America/Toronto
+      - TZ=${TIMEZONE}
       - WEBUI_PORT=5555
     volumes:
       - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}:/config
@@ -72,7 +72,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Toronto
+      - TZ=${TIMEZONE}
     volumes:
       - Sonarr:/config
       - ${MOUNT_TO_TV}:/tv # Update if mount is in different location
@@ -88,7 +88,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Toronto
+      - TZ=${TIMEZONE}
     volumes:
       - Radarr:/config
       - ${MOUNT_TO_MOVIES}:/movies # Update if mount is in different location
@@ -104,7 +104,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Toronto
+      - TZ=${TIMEZONE}
     volumes:
       - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/bazarr:/config
       - ${MOUNT_TO_MOVIES}:/movies # Update if mount is in different location
@@ -120,7 +120,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Toronto
+      - TZ=${TIMEZONE}
       - AUTO_UPDATE=true #optional
       - RUN_OPTS= #optional
     volumes:
