@@ -3,7 +3,7 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 
 # How to Use
 
-:warning: **Make sure ALL your mounts are properly mounted.**
+:warning: **Make sure all your mounts are properly mounted.**
 
 ## Docker Compose
 
