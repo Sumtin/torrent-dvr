@@ -40,7 +40,7 @@ services:
     network_mode: container:vpn
     environment:
       - PUID=1000
-      - PGID=1000\
+      - PGID=1000
       - TZ=${TIMEZONE}
       - WEBUI_PORT=5555
     volumes:
