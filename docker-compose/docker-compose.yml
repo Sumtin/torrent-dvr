@@ -13,21 +13,19 @@ services:
     image: containrrr/watchtower
     restart: unless-stopped
 
-  # ExpressVPN - Must be amd64 arch.  Check out following for arm: https://hub.docker.com/r/misioslav/expressvpn
-  expressvpn:
-    container_name: expressvpn
-    image: polkaned/expressvpn
-    environment:
-      - ACTIVATION_CODE=${EXPRESSVPN_ACTIVATION_CODE} # ** SECRET **
-      - SERVER=smart
+  # VPN - Gluetun
+  gluetun:
+    container_name: vpn
+    image: qmcgaw/gluetun
     cap_add:
       - NET_ADMIN
-    devices: 
-      - /dev/net/tun
-    stdin_open: true
-    tty: true
-    command: /bin/bash
-    privileged: true
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=QDSo5F+RdpycLTvi36G1YCCyk8vLxyoDRvGOW4xqR3E=
+      - SERVER_COUNTRIES=Netherlands
     restart: unless-stopped
     # List ports for all containers that will route through this container
     ports:
@@ -36,6 +34,30 @@ services:
       - 6881:6881/udp  # qBittorrent default
       - 8080:8080      # Gatus default
       - 3000:3000      # OpenSpeedTest
+
+  # VPN - ExpressVPN - Must be amd64 arch.  Check out following for arm: https://hub.docker.com/r/misioslav/expressvpn
+  # expressvpn:
+  #   container_name: vpn
+  #   image: polkaned/expressvpn
+  #   environment:
+  #     - ACTIVATION_CODE=${EXPRESSVPN_ACTIVATION_CODE} # ** SECRET **
+  #     - SERVER=smart
+  #   cap_add:
+  #     - NET_ADMIN
+  #   devices: 
+  #     - /dev/net/tun
+  #   stdin_open: true
+  #   tty: true
+  #   command: /bin/bash
+  #   privileged: true
+  #   restart: unless-stopped
+  #   # List ports for all containers that will route through this container
+  #   ports:
+  #     - 5555:5555      # qBittorrent WEBUI_PORT value
+  #     - 6881:6881      # qBittorrent default
+  #     - 6881:6881/udp  # qBittorrent default
+  #     - 8080:8080      # Gatus default
+  #     - 3000:3000      # OpenSpeedTest
 
   # qBittorrent (routes through ExpressVPN)
   bittorrent:
@@ -52,9 +74,9 @@ services:
       - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
     restart: unless-stopped    
     depends_on:
-      - expressvpn
+      - vpn
 
-  # Gatus (routes through ExpressVPN)
+  # Gatus (routes through VPN container)
   gatus:
     container_name: gatus
     image: twinproduction/gatus
@@ -63,7 +85,7 @@ services:
     volumes:
       - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/gatus:/config
     depends_on:
-      - expressvpn
+      - vpn
 
   # Sonarr (TV)
   sonarr:
