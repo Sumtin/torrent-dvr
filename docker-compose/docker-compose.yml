@@ -14,8 +14,8 @@ services:
     restart: unless-stopped
 
   # VPN - Gluetun
-  gluetun:
-    container_name: vpn
+  vpn:
+    container_name: vpn-gluetun
     image: qmcgaw/gluetun
     cap_add:
       - NET_ADMIN
