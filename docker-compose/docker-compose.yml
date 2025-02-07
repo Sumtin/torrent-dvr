@@ -13,7 +13,7 @@ services:
 
   # VPN - Gluetun
   vpn:
-    container_name: vpn-gluetun
+    container_name: vpn
     image: qmcgaw/gluetun
     cap_add:
       - NET_ADMIN
