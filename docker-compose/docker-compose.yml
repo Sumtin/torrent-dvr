@@ -24,8 +24,8 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=wireguard
-      - WIREGUARD_PRIVATE_KEY=QDSo5F+RdpycLTvi36G1YCCyk8vLxyoDRvGOW4xqR3E=
-      - SERVER_COUNTRIES=Netherlands
+      - WIREGUARD_PRIVATE_KEY=${VPN_PROTON_ACTIVATION_CODE}
+      - SERVER_COUNTRIES=${VPN_PROTON_COUNTRY}
     restart: unless-stopped
     # List ports for all containers that will route through this container
     ports:
@@ -63,7 +63,7 @@ services:
   bittorrent:
     container_name: qbittorrent
     image: lscr.io/linuxserver/qbittorrent:latest
-    network_mode: container:expressvpn
+    network_mode: container:vpn
     environment:
       - PUID=1000
       - PGID=1000\
@@ -80,7 +80,7 @@ services:
   gatus:
     container_name: gatus
     image: twinproduction/gatus
-    network_mode: container:expressvpn
+    network_mode: container:vpn
     restart: always
     volumes:
       - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/gatus:/config
@@ -176,9 +176,9 @@ services:
       restart: no
       container_name: openspeedtest-vpn
       image: openspeedtest/latest
-      network_mode: container:expressvpn
+      network_mode: container:vpn
       depends_on:
-        - expressvpn   
+        - vpn   
 
   # Popular Auto-Downloader (IRC/RSS monitor)
   autobrr:
