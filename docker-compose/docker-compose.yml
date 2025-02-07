@@ -63,7 +63,7 @@ services:
   bittorrent:
     container_name: qbittorrent
     image: lscr.io/linuxserver/qbittorrent:latest
-    network_mode: container:expressvpn
+    network_mode: container:vpn
     environment:
       - PUID=1000
       - PGID=1000\
@@ -80,7 +80,7 @@ services:
   gatus:
     container_name: gatus
     image: twinproduction/gatus
-    network_mode: container:expressvpn
+    network_mode: container:vpn
     restart: always
     volumes:
       - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/gatus:/config
@@ -176,9 +176,9 @@ services:
       restart: no
       container_name: openspeedtest-vpn
       image: openspeedtest/latest
-      network_mode: container:expressvpn
+      network_mode: container:vpn
       depends_on:
-        - expressvpn   
+        - vpn   
 
   # Popular Auto-Downloader (IRC/RSS monitor)
   autobrr:
