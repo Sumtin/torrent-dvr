@@ -23,7 +23,7 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 7. Under Environment Variables, select `Advanced Mode`
 8. Copy entire contents of [`/docker-compose/.env`](https://github.com/Sumtin/torrent-dvr/blob/main/docker-compose/.env) into text area.
 9. Update environment variables as needed
-
+ 
 # What's Included?
 
 The following containers are used in this solution:
