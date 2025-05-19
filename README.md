@@ -30,7 +30,7 @@ The following containers are used in this solution:
 
 | Service | Behind VPN? | Port | Purpose | Official Docs |
 |---|:---:|:---:|---|---|
-| ExpressVPN | N/A | N/A | VPN container |https://github.com/polkaned/dockerfiles/tree/master/expressvpn |
+| Gluetun | N/A | N/A | VPN container | https://github.com/qdm12/gluetun-wiki |
 |WatchTower|No|N/A|Auto-updates containers|https://github.com/containrrr/watchtower| 
 |OpenSpeedTest|Yes|3000|Speed test behind VPN|https://openspeedtest.com/|
 |OpenSpeedTest|No|3030|Speed test not behind VPN|https://openspeedtest.com/|
