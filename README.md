@@ -53,7 +53,7 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 
 ### Optional: Port Forwarding
 
-If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent:
+If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
 
 
 # What's Included?
