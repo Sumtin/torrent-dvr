@@ -17,6 +17,7 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 # How to Use
 
 :warning: **Default Traefik configuration only supports HTTP**
+
 :warning: **Make sure all your mounts are properly mounted.**
 
 ## Docker Compose
