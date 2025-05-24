@@ -68,7 +68,7 @@ The following containers are used in this solution:
 |qBittorrent|Yes|http://torrents.your-domain|5555|Bittorrent client|https://docs.linuxserver.io/images/docker-qbittorrent|
 |Radarr|Yes|http://movies.your-domain|7878|Monitors Movies|https://docs.linuxserver.io/images/docker-radarr|
 |Sonarr|Yes|http://tv.your-domain|8989|Monitors TV shows|https://docs.linuxserver.io/images/docker-sonarr|
-|Bazarr|Yes|http://subtitles.your-domain|6767|Auto-grabs subtitles|https://docs.linuxserver.io/images/docker-bazarr|
+|Bazarr|Yes|http://subtitles.your-domain|6767|Manages subtitles|https://docs.linuxserver.io/images/docker-bazarr|
 |Jackett|Yes|http://jackett.your-domain|9117|Torrent site proxy for Sonarr/Radarr |https://docs.linuxserver.io/images/docker-jackett|
 |Flaresolverr|Yes|http://flaresolverr.your-domain|8191|Fix for torrent sites using CloudFlare proxy|https://github.com/FlareSolverr/FlareSolverr|
 
