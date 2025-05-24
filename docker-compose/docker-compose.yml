@@ -1,25 +1,29 @@
+
+networks:
+  t3_proxy:
+    # Specify driver options
+    driver: bridge
+
+
 services:
 
   proxy:
-    image: traefik:latest         # Review traefik documentation https://doc.traefik.io/traefik/ 
+    image: traefik:v3.4.0         # Review traefik documentation https://doc.traefik.io/traefik/ 
     container_name: traefik
     command:
       - --api.insecure=true
       - --providers.docker=true
+      - --providers.docker.network=t3_proxy
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
+      # - --log.level=DEBUG
+    # Mandatory. Must be on same network as VPN.
+    networks: 
+      - t3_proxy
     # List ports for all containers
     ports:
       - 80:80          # Traefik proxy
       - 8080:8080      # Traefik Web UI, enabled by api.insecure=true
-      - 5555:5555      # qBittorrent WEBUI_PORT value
-      - 6881:6881      # qBittorrent default
-      - 6881:6881/udp  # qBittorrent default
-      - 8989:8989      # Sonarr
-      - 7878:7878      # Radarr
-      - 6767:6767      # Bazarr
-      - 9117:9117      # Jackett
-      - 8191:8191      # Flaresolverr
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
@@ -28,18 +32,30 @@ services:
   vpn:
     container_name: vpn
     image: qmcgaw/gluetun
+    # Mandatory. Must be on same network as proxy.
+    networks: 
+      - t3_proxy    
     cap_add:
       - NET_ADMIN
     devices:
       - /dev/net/tun:/dev/net/tun
+    # Must list all ports for all client services
+    ports:
+      - 5555:5555      # qBittorrent WEBUI_PORT value
+      - 6881:6881      # qBittorrent default
+      - 6881:6881/udp  # qBittorrent default
+      - 8989:8989      # Sonarr
+      - 7878:7878      # Radarr
+      - 6767:6767      # Bazarr
+      - 9117:9117      # Jackett
+      - 8191:8191      # Flaresolverr
     environment:
       - VPN_PORT_FORWARDING=on
       - VPN_SERVICE_PROVIDER=${VPN_PROVIDER}
       - VPN_TYPE=${VPN_TYPE}
       - WIREGUARD_PRIVATE_KEY=${VPN_ACTIVATION_CODE}
       - SERVER_COUNTRIES=${VPN_COUNTRY}
-    restart: unless-stopped
-    
+    restart: unless-stopped   
 
   # qBittorrent (routes through VPN)
   torrent:
@@ -57,7 +73,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.torrent.loadbalancer.server.port=5555
-      - traefik.http.routers.torrent.rule=Path(`/torrent`)
+      - traefik.http.routers.torrent.rule=Host(`torrents.${DOMAIN_NAME}`)  
     restart: unless-stopped    
     depends_on:
       - vpn
@@ -79,11 +95,12 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
-      - traefik.http.routers.sonarr.rule=Path(`/tv`)            
+      - traefik.http.routers.sonarr.rule=Host(`tv.${DOMAIN_NAME}`)  
     restart: unless-stopped
     depends_on:
-      - vpn
       - proxy
+      - vpn
+      
 
   # Radarr (Movies)
   radarr:
@@ -101,13 +118,13 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.radarr.loadbalancer.server.port=7878
-      - traefik.http.routers.radarr.rule=Path(`/movies`)            
+      - traefik.http.routers.radarr.rule=Host(`movies.${DOMAIN_NAME}`)  
     restart: unless-stopped
     depends_on:
       - vpn
       - proxy
 
-  # Bazarr (Subtitles for Movie and TV)
+  # # Bazarr (Subtitles for Movie and TV)
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
@@ -123,7 +140,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.bazarr.loadbalancer.server.port=6767
-      - traefik.http.routers.bazarr.rule=Path(`/subtitles`)
+      - traefik.http.routers.bazarr.rule=Host(`subtitles.${DOMAIN_NAME}`)  
     restart: unless-stopped
     depends_on:
       - vpn
@@ -146,7 +163,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.jackett.loadbalancer.server.port=9117
-      - traefik.http.routers.jackett.rule=Path(`/jackett`)
+      - traefik.http.routers.jackett.rule=Host(`jackett.${DOMAIN_NAME}`)  
     restart: unless-stopped
     depends_on:
       - vpn
@@ -163,7 +180,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.flaresolverr.loadbalancer.server.port=8191
-      - traefik.http.routers.flaresolverr.rule=Path(`/flaresolverr`)        
+      - traefik.http.routers.flaresolverr.rule=Host(`flaresolverr.${DOMAIN_NAME}`)  
     restart: unless-stopped
     depends_on:
       - vpn
@@ -207,3 +224,5 @@ services:
 volumes:
   Radarr:
   Sonarr:
+
+
