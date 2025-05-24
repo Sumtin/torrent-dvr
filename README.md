@@ -12,7 +12,7 @@
 
 
 # Introduction
-Collection of secure deployments for torrent-based digital video recorders (DVR) for movies and TV shows.
+Docker Compose deployment for torrent-based digital video recorders (DVR) for movies and TV shows.
 
 The following containers are used in this solution:
 
