@@ -69,7 +69,8 @@ The following containers are used in this solution:
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
 
-# Networking
+# Notes
+## Networking
 
 - Default Traefik config only supports HTTP (see [Traefik docs](https://doc.traefik.io/) for HTTPS)
 - All containers except for Traefik and WatchTower are routed through the Gluetun container to ensure privacy.  
@@ -78,7 +79,7 @@ If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.co
 - qBittorrent requires some network configs that [must be done manually](#manual-qbittorrent-configurations).
 - DNS must be configured manually and is beyond the scope of this wiki.
 
-# Notes
 ## Why are Radarr and Sonarr volumes not mounted remotely?
+
 Sonarr and Radarr both use SQLite and it doesn't play nice when accessed over a network. 
 https://access.redhat.com/solutions/120733
