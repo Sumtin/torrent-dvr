@@ -14,6 +14,20 @@
 # Introduction
 Collection of secure deployments for torrent-based digital video recorders (DVR) for movies and TV shows.
 
+The following containers are used in this solution:
+
+| Service | Behind VPN? | HTTP Endpoint | Docker Port | Purpose | Official Docs |
+|---|:---:|---|:---:|---|---|
+|Gluetun|N/A|N/A|N/A|VPN container|https://github.com/qdm12/gluetun-wiki|
+|Traefik Dashboard|No|http://your-domain|8080|Reverse Proxy|https://doc.traefik.io/|
+|WatchTower|No|N/A|N/A|Auto-updates containers|https://github.com/containrrr/watchtower| 
+|qBittorrent|Yes|http://torrents.your-domain|5555|Bittorrent client|https://docs.linuxserver.io/images/docker-qbittorrent|
+|Radarr|Yes|http://movies.your-domain|7878|Monitors Movies|https://docs.linuxserver.io/images/docker-radarr|
+|Sonarr|Yes|http://tv.your-domain|8989|Monitors TV shows|https://docs.linuxserver.io/images/docker-sonarr|
+|Bazarr|Yes|http://subtitles.your-domain|6767|Manages subtitles|https://docs.linuxserver.io/images/docker-bazarr|
+|Jackett|Yes|http://jackett.your-domain|9117|Torrent site proxy for Sonarr/Radarr |https://docs.linuxserver.io/images/docker-jackett|
+|Flaresolverr|Yes|http://flaresolverr.your-domain|8191|Fix for torrent sites using CloudFlare proxy|https://github.com/FlareSolverr/FlareSolverr|
+
 # How to Use
 
 :warning: **Default Traefik configuration only supports HTTP**
@@ -54,23 +68,6 @@ Collection of secure deployments for torrent-based digital video recorders (DVR)
 ### Optional: Port Forwarding
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
-
-
-# What's Included?
-
-The following containers are used in this solution:
-
-| Service | Behind VPN? | HTTP Endpoint | Docker Port | Purpose | Official Docs |
-|---|:---:|---|:---:|---|---|
-|Gluetun|N/A|N/A|N/A|VPN container|https://github.com/qdm12/gluetun-wiki|
-|Traefik Dashboard|No|http://your-domain|8080|Reverse Proxy|https://doc.traefik.io/|
-|WatchTower|No|N/A|N/A|Auto-updates containers|https://github.com/containrrr/watchtower| 
-|qBittorrent|Yes|http://torrents.your-domain|5555|Bittorrent client|https://docs.linuxserver.io/images/docker-qbittorrent|
-|Radarr|Yes|http://movies.your-domain|7878|Monitors Movies|https://docs.linuxserver.io/images/docker-radarr|
-|Sonarr|Yes|http://tv.your-domain|8989|Monitors TV shows|https://docs.linuxserver.io/images/docker-sonarr|
-|Bazarr|Yes|http://subtitles.your-domain|6767|Manages subtitles|https://docs.linuxserver.io/images/docker-bazarr|
-|Jackett|Yes|http://jackett.your-domain|9117|Torrent site proxy for Sonarr/Radarr |https://docs.linuxserver.io/images/docker-jackett|
-|Flaresolverr|Yes|http://flaresolverr.your-domain|8191|Fix for torrent sites using CloudFlare proxy|https://github.com/FlareSolverr/FlareSolverr|
 
 # Networking
 
