@@ -56,6 +56,9 @@ services:
       - VPN_TYPE=${VPN_TYPE}
       - WIREGUARD_PRIVATE_KEY=${VPN_ACTIVATION_CODE}
       - SERVER_COUNTRIES=${VPN_COUNTRY}
+      # Command below used to update qBittorrent port (useful if VPN provider assigns random port for port forwarding)
+      # Details here: https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md#qbittorrent-example
+      #- VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'
     restart: unless-stopped   
 
   # qBittorrent (routes through VPN)
