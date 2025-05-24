@@ -1,39 +1,68 @@
+
+networks:
+  t3_proxy:
+    # Specify driver options
+    driver: bridge
+
+
 services:
-  # Watchtower - Auto update all containers
-  watchtower:
-    container_name: watchtower
+
+  proxy:
+    image: traefik:v3.4.0         # Review traefik documentation https://doc.traefik.io/traefik/ 
+    container_name: traefik
+    command:
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.network=t3_proxy
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      # - --log.level=DEBUG
+    # Mandatory. Must be on same network as VPN.
+    networks: 
+      - t3_proxy
+    # List ports for all containers
+    ports:
+      - 80:80          # Traefik proxy
+      - 8080:8080      # Traefik Web UI, enabled by api.insecure=true
     volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
-    environment:
-      - WATCHTOWER_NOTIFICATIONS=shoutrrr
-      - 'WATCHTOWER_NOTIFICATION_URL=discord://${DISCORD_NOTIFICATION_SERVER_KEY}'  # ** SECRET **
-      - 'WATCHTOWER_NOTIFICATION_TEMPLATE={{range .}}{{.Time.Format \2006-01-02'
-    image: containrrr/watchtower
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
 
   # VPN - Gluetun
   vpn:
     container_name: vpn
     image: qmcgaw/gluetun
+    # Mandatory. Must be on same network as proxy.
+    networks: 
+      - t3_proxy    
     cap_add:
       - NET_ADMIN
     devices:
       - /dev/net/tun:/dev/net/tun
-    environment:
-      - VPN_PORT_FORWARDING=on
-      - VPN_SERVICE_PROVIDER=${VPN_PROVIDER}
-      - VPN_TYPE=${VPN_TYPE}
-      - WIREGUARD_PRIVATE_KEY=${VPN_ACTIVATION_CODE}
-      - SERVER_COUNTRIES=${VPN_COUNTRY}
-    restart: unless-stopped
-    # List ports for all containers that will route through this container
+    # Must list all ports for all client services
     ports:
       - 5555:5555      # qBittorrent WEBUI_PORT value
       - 6881:6881      # qBittorrent default
       - 6881:6881/udp  # qBittorrent default
+      - 8989:8989      # Sonarr
+      - 7878:7878      # Radarr
+      - 6767:6767      # Bazarr
+      - 9117:9117      # Jackett
+      - 8191:8191      # Flaresolverr
+    environment:
+      - VPN_PORT_FORWARDING=${VPN_PORT_FORWARDING}
+      - VPN_PORT_FORWARDING_PROVIDER=${VPN_PROVIDER}
+      - VPN_SERVICE_PROVIDER=${VPN_PROVIDER}
+      - VPN_TYPE=${VPN_TYPE}
+      - WIREGUARD_PRIVATE_KEY=${VPN_ACTIVATION_CODE}
+      - SERVER_COUNTRIES=${VPN_COUNTRY}
+      # Command below used to update qBittorrent port (useful if VPN provider assigns random port for port forwarding)
+      # Details here: https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md#qbittorrent-example
+      #- VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'
+    restart: unless-stopped   
 
   # qBittorrent (routes through VPN)
-  bittorrent:
+  torrent:
     container_name: qbittorrent
     image: lscr.io/linuxserver/qbittorrent:latest
     network_mode: container:vpn
@@ -45,14 +74,20 @@ services:
     volumes:
       - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}:/config
       - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.torrent.loadbalancer.server.port=5555
+      - traefik.http.routers.torrent.rule=Host(`torrents.${DOMAIN_NAME}`)  
     restart: unless-stopped    
     depends_on:
       - vpn
+      - proxy
 
   # Sonarr (TV)
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
+    network_mode: container:vpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -61,14 +96,21 @@ services:
       - Sonarr:/config
       - ${MOUNT_TO_TV}:/tv # Update if mount is in different location
       - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
-    ports:
-      - 8989:8989
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.sonarr.loadbalancer.server.port=8989
+      - traefik.http.routers.sonarr.rule=Host(`tv.${DOMAIN_NAME}`)  
     restart: unless-stopped
+    depends_on:
+      - proxy
+      - vpn
+      
 
   # Radarr (Movies)
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
+    network_mode: container:vpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -77,14 +119,20 @@ services:
       - Radarr:/config
       - ${MOUNT_TO_MOVIES}:/movies # Update if mount is in different location
       - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
-    ports:
-      - 7878:7878
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.radarr.loadbalancer.server.port=7878
+      - traefik.http.routers.radarr.rule=Host(`movies.${DOMAIN_NAME}`)  
     restart: unless-stopped
-  
-  # Bazarr (Subtitles for Movie and TV)
+    depends_on:
+      - vpn
+      - proxy
+
+  # # Bazarr (Subtitles for Movie and TV)
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
+    network_mode: container:vpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -93,14 +141,20 @@ services:
       - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/bazarr:/config
       - ${MOUNT_TO_MOVIES}:/movies # Update if mount is in different location
       - ${MOUNT_TO_TV}:/tv # Update if mount is in different location
-    ports:
-      - 6767:6767
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.bazarr.loadbalancer.server.port=6767
+      - traefik.http.routers.bazarr.rule=Host(`subtitles.${DOMAIN_NAME}`)  
     restart: unless-stopped
-  
+    depends_on:
+      - vpn
+      - proxy
+
   # Jackett (allows usenet bots like Sonarr and Radarr to use torrent sites) - Need to investigate Prowlarr
   jackett:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
+    network_mode: container:vpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -110,20 +164,44 @@ services:
     volumes:
       - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/jackett:/config
       - ${MOUNT_TO_BTDOWNLOADS}:/downloads
-    ports:
-      - 9117:9117
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.jackett.loadbalancer.server.port=9117
+      - traefik.http.routers.jackett.rule=Host(`jackett.${DOMAIN_NAME}`)  
     restart: unless-stopped
+    depends_on:
+      - vpn
+      - proxy
 
   # Flaresolverr (only needed if torrent site behind CloudFlare proxy)
   flaresolverr:
     container_name: flaresolverr
     image: 21hsmw/flaresolverr:nodriver
-    ports:
-        - 8191:8191
+    network_mode: container:vpn
     environment:
         - DRIVER=nodriver
         - TZ=${TIMEZONE}
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.flaresolverr.loadbalancer.server.port=8191
+      - traefik.http.routers.flaresolverr.rule=Host(`flaresolverr.${DOMAIN_NAME}`)  
     restart: unless-stopped
+    depends_on:
+      - vpn
+      - proxy
+  
+  # Watchtower - Auto update all containers
+  watchtower:
+    container_name: watchtower
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    environment:
+      - WATCHTOWER_NOTIFICATIONS=shoutrrr
+      - 'WATCHTOWER_NOTIFICATION_URL=${SHOUTRR_SERVICE_URL}'
+      - 'WATCHTOWER_NOTIFICATION_TEMPLATE={{range .}}{{.Time.Format \2006-01-02'
+    image: containrrr/watchtower
+    restart: unless-stopped
+
 
   # Popular Auto-Downloader (IRC/RSS monitor)
   # autobrr:
@@ -146,27 +224,9 @@ services:
   #   ports:
   #     - 7474:7474
 
-  # # Traefik reverse proxy
-  # reverse-proxy:
-  #   image: traefik:v2.10
-  #   # Enables the web UI and tells Traefik to listen to docker
-  #   command: --api.insecure=true --providers.docker
-  #   ports:
-  #     # The HTTP port
-  #     - "80:80"
-  #     # The Web UI (enabled by --api.insecure=true)
-  #     - "8080:8888"
-  #   volumes:
-  #     # So that Traefik can listen to the Docker events
-  #     - /var/run/docker.sock:/var/run/docker.sock
-
-  # # Traefix helper - A container that exposes an API to show its IP address
-  # whoami:
-  #   image: traefik/whoami
-  #   labels:
-  #     - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
-
 # Create local volume mounts
 volumes:
   Radarr:
   Sonarr:
+
+
