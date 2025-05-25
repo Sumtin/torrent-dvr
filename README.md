@@ -73,13 +73,13 @@ If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.co
 :warning: If VPN service forwards to random port, qBittorrent must be updated any time Gluetun restarts.
 
 # Notes
+
 ## Networking
 
 - Default Traefik config only supports HTTP (see [Traefik docs](https://doc.traefik.io/) for HTTPS)
-- All containers except for Traefik and WatchTower are routed through the Gluetun container to ensure privacy.  
+- All Internet-bound traffic is routed through the VPN container to ensure privacy, excluding Traefik and WatchTower.  
 - Gluetun container must expose ports for child containers.
 - Gluetun and Traefik share a bridge network as required by Traefik.
-- qBittorrent requires some network configs that [must be done manually](#manual-qbittorrent-configurations).
 - DNS must be configured manually and is beyond the scope of this wiki.
 
 ## Why are Radarr and Sonarr volumes not mounted remotely?
