@@ -1,12 +1,8 @@
-
 networks:
   t3_proxy:
-    # Specify driver options
     driver: bridge
 
-
 services:
-
   proxy:
     image: traefik:v3.4.0         # Review traefik documentation https://doc.traefik.io/traefik/ 
     container_name: traefik
