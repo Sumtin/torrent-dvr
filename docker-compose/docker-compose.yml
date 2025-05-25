@@ -30,7 +30,7 @@ services:
     image: qmcgaw/gluetun
     # Mandatory. Must be on same network as proxy.
     networks: 
-      - t3_proxy    
+      - t3_proxy     
     cap_add:
       - NET_ADMIN
     devices:
@@ -52,6 +52,8 @@ services:
       - VPN_TYPE=${VPN_TYPE}
       - WIREGUARD_PRIVATE_KEY=${VPN_ACTIVATION_CODE}
       - SERVER_COUNTRIES=${VPN_COUNTRY}
+      - FIREWALL_OUTBOUND_SUBNETS=${VPN_BYPASS_LOCAL_NETWORK_CIDR}  # Allow local traffic to bypass firewall
+      - DNS_ADDRESS=127.0.0.11  # User Docker DNS (which should be using local network DNS) instead of Unbound DNS that is packaged with Gluetun
       # Command below used to update qBittorrent port (useful if VPN provider assigns random port for port forwarding)
       # Details here: https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md#qbittorrent-example
       #- VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'
@@ -89,7 +91,7 @@ services:
       - PGID=1000
       - TZ=${TIMEZONE}
     volumes:
-      - Sonarr:/config
+      - ${MOUNT_TO_LOCAL_VOLUME_STORE}/${HOST_NAME}/Sonarr:/config
       - ${MOUNT_TO_TV}:/tv # Update if mount is in different location
       - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
     labels:
@@ -112,7 +114,7 @@ services:
       - PGID=1000
       - TZ=${TIMEZONE}
     volumes:
-      - Radarr:/config
+      - ${MOUNT_TO_LOCAL_VOLUME_STORE}/${HOST_NAME}/Radarr:/config
       - ${MOUNT_TO_MOVIES}:/movies # Update if mount is in different location
       - ${MOUNT_TO_BTDOWNLOADS}:/downloads # Update if mount is in different location
     labels:
@@ -219,10 +221,3 @@ services:
   #     - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/autobrr/config:/config
   #   ports:
   #     - 7474:7474
-
-# Create local volume mounts
-volumes:
-  Radarr:
-  Sonarr:
-
-
