@@ -68,7 +68,7 @@ The following containers are used in this solution:
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
 
-:warning: If VPN service forwards use random port, qBittorrent must be updated any time Gluetun restarts.
+:warning: If VPN service forwards to random port, qBittorrent must be updated any time Gluetun restarts.
 
 # Notes
 ## Networking
