@@ -60,12 +60,12 @@ The following containers are used in this solution:
 
 ## Manual qBittorrent Configurations
 
-### Mandatory: Set Network Interface to VPN
+### Set Network Interface to VPN - MANDATORY
 
 1. From qBittorrent, `Tools -> Options -> Advanced`.
 2. Change `Network interface` to `tun0`.
 
-### Optional: Port Forwarding
+### Port Forwarding - OPTIONAL
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
 
