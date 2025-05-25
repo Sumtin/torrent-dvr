@@ -7,7 +7,7 @@
     - [Port Forwarding - OPTIONAL](#port-forwarding---optional)
 - [Notes](#notes)
   - [Networking](#networking)
-  - [Why are Radarr and Sonarr volumes not mounted remotely?](#why-are-radarr-and-sonarr-volumes-not-mounted-remotely)
+  - [Why are Radarr/Sonarr/Bazarr volumes not mounted remotely?](#why-are-radarrsonarrbazarr-volumes-not-mounted-remotely)
 
 
 # Introduction
@@ -82,7 +82,7 @@ If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.co
 - Gluetun and Traefik share a bridge network as required by Traefik.
 - DNS must be configured manually and is beyond the scope of this wiki.
 
-## Why are Radarr and Sonarr volumes not mounted remotely?
+## Why are Radarr/Sonarr/Bazarr volumes not mounted remotely?
 
-Sonarr and Radarr both use SQLite and it doesn't play nice when accessed over a network. 
+Sonarr, Radarr, and Bazarr all use SQLite and it doesn't play nice when accessed over a network. 
 https://access.redhat.com/solutions/120733

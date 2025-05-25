@@ -136,7 +136,7 @@ services:
       - PGID=1000
       - TZ=${TIMEZONE}
     volumes:
-      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/bazarr:/config
+      - ${MOUNT_TO_LOCAL_VOLUME_STORE}/${HOST_NAME}/Bazarr:/config
       - ${MOUNT_TO_MOVIES}:/movies # Update if mount is in different location
       - ${MOUNT_TO_TV}:/tv # Update if mount is in different location
     labels:
