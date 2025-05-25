@@ -36,26 +36,28 @@ The following containers are used in this solution:
 ## Docker Compose
 
 1. Clone this repo
-1. Change working directory to `/docker-compose/`
-1. Rename `.env.example` to `.env` file and modify as needed
-1. Run `docker compose up -d`
-1. Review [Manual qBittorrent Configurations](#manual-qbittorrent-configurations)
-1. Visit each HTTP endpoint and configure the apps
+2. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](ttps://github.com/Sumtin/torrent-dvr/blob/main/docker-compose/.env.exam) file)
+3. Change working directory to `/docker-compose/`
+4. Rename `.env.example` to `.env` file and modify as needed
+6. Run `docker compose up -d`
+7. Review [Manual qBittorrent Configurations](#manual-qbittorrent-configurations)
+8. Visit each HTTP endpoint and configure the apps
 
 ## Portainer Stack
 
-1. Open `Portainer -> Stacks -> Add Stack`
-2. Enter a Name (i.e. `torrent-dvr`)
-3. Click `Repository`
-4. Repository URL = `https://github.com/Sumtin/torrent-dvr/`
-5. Repo Reference = `refs/heads/main`
-6. Compose Path = `docker-compose/docker-compose.yml`
-7. Under Environment Variables, select `Advanced Mode`
-8. Copy entire contents of [`/docker-compose/.env.example`](https://github.com/Sumtin/torrent-dvr/blob/main/docker-compose/.env.example) into text area.
-9. Update environment variables as needed
-10. Create the Stack
-11. Review [Manual qBittorrent Configurations](#manual-qbittorrent-configurations)
-12. Visit each HTTP endpoint and configure the apps!
+1. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](ttps://github.com/Sumtin/torrent-dvr/blob/main/docker-compose/.env.exam) file)
+2. Open `Portainer -> Stacks -> Add Stack`
+3. Enter a Name (i.e. `torrent-dvr`)
+4. Click `Repository`
+5. Repository URL = `https://github.com/Sumtin/torrent-dvr/`
+6. Repo Reference = `refs/heads/main`
+7. Compose Path = `docker-compose/docker-compose.yml`
+8. Under Environment Variables, select `Advanced Mode`
+9. Copy entire contents of [`/docker-compose/.env.example`](https://github.com/Sumtin/torrent-dvr/blob/main/docker-compose/.env.example) into text area.
+10. Update environment variables as needed
+11. Create the Stack
+12. Review [Manual qBittorrent Configurations](#manual-qbittorrent-configurations)
+13. Visit each HTTP endpoint and configure the apps!
 
 ## Manual qBittorrent Configurations
 
