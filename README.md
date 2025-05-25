@@ -3,11 +3,10 @@
   - [Docker Compose](#docker-compose)
   - [Portainer Stack](#portainer-stack)
   - [Manual qBittorrent Configurations](#manual-qbittorrent-configurations)
-    - [Mandatory: Set Network Interface to VPN](#mandatory-set-network-interface-to-vpn)
-    - [Optional: Port Forwarding](#optional-port-forwarding)
-- [What's Included?](#whats-included)
-- [Networking](#networking)
+    - [Set Network Interface to VPN - MANDATORY](#set-network-interface-to-vpn---mandatory)
+    - [Port Forwarding - OPTIONAL](#port-forwarding---optional)
 - [Notes](#notes)
+  - [Networking](#networking)
   - [Why are Radarr and Sonarr volumes not mounted remotely?](#why-are-radarr-and-sonarr-volumes-not-mounted-remotely)
 
 
@@ -68,6 +67,8 @@ The following containers are used in this solution:
 ### Port Forwarding - OPTIONAL
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
+
+:warning: If VPN service forwards use random port, qBittorrent must be updated any time Gluetun restarts.
 
 # Notes
 ## Networking
