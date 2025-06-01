@@ -4,9 +4,7 @@
   - [Portainer Stack](#portainer-stack)
 - [Configuration](#configuration)
   - [Quick Start](#quick-start)
-  - [qBittorrent](#qbittorrent)
-    - [Set Network Interface to VPN - MANDATORY](#set-network-interface-to-vpn---mandatory)
-    - [Port Forwarding - OPTIONAL](#port-forwarding---optional)
+  - [qBittorrent Port Forwarding - OPTIONAL](#qbittorrent-port-forwarding---optional)
 - [Notes](#notes)
   - [Networking](#networking)
   - [Why ARR some volumes not mounted remotely?](#why-arr-some-volumes-not-mounted-remotely)
@@ -75,16 +73,9 @@ Steps below will get the *ARR stack connected to each other and torrent client. 
 9.  `Settings -> Radarr`, using `http://localhost:7878`
 10. Open qBittorrent (`http://torrents.domain`)
 11. `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
-12. `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost` (this is for the automatic port updater script)
+12. `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost` (this is for the automatic port updater script, see below)
 
-## qBittorrent
-
-### Set Network Interface to VPN - MANDATORY
-
-1. From qBittorrent, `Tools -> Options -> Advanced`.
-2. Change `Network interface` to `tun0`.
-
-### Port Forwarding - OPTIONAL
+## qBittorrent Port Forwarding - OPTIONAL
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
 
