@@ -99,7 +99,6 @@ services:
       - proxy
       - vpn
       
-
   # Radarr (Movies)
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -163,7 +162,6 @@ services:
     depends_on:
       - vpn
       - proxy
-
   
   # Watchtower - Auto update all containers
   watchtower:
@@ -176,7 +174,6 @@ services:
       - 'WATCHTOWER_NOTIFICATION_TEMPLATE={{range .}}{{.Time.Format \2006-01-02'
     image: containrrr/watchtower
     restart: unless-stopped
-
 
   # Popular Auto-Downloader (IRC/RSS monitor)
   # autobrr:
