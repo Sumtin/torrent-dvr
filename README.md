@@ -62,19 +62,21 @@ The following containers are used in this solution:
 
 ## Quick Start
 
-Steps below will get the *ARR stack connected to each other. Refer to each product's offical docs for further configurations.
+Steps below will get the *ARR stack connected to each other and torrent client. Refer to each product's offical docs for further configurations.
 
-1. Open Prowlarr (`http://indexers.domain`)
-2. `Settings -> Indexers`, then add one or more torrent indexers
-3. `Settings -> Apps`, then add Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
-4. Open Sonarr and Radarr (`http://tv.domain`, `http://movies.domain`)
-5. For each, `Settings -> Download Clients`, add qBittorrent at `localhost` with port `5555`
-6. Open Bazarr (`http://subtitles.domain`)
-7. `Settings -> Sonarr`, using `http://localhost:8989`
-8. `Settings -> Radarr`, using `http://localhost:7878`
-9. Open qBittorrent (`http://torrents.domain`)
-10. `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
-11. `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost` (this is for the automatic port updater script)
+
+1. Open Sonarr and Radarr (`http://tv.domain`, `http://movies.domain`)
+2. For each, `Settings -> Download Clients`, add qBittorrent at `localhost` with port `5555`
+3. For each, `Settings -> General` and make note of their respective API Keys, which are needed for the Prowlarr config
+4. Open Prowlarr (`http://indexers.domain`)
+5. `Settings -> Indexers`, then add one or more torrent indexers
+6. `Settings -> Apps`, then add Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
+7. Open Bazarr (`http://subtitles.domain`)
+8. `Settings -> Sonarr`, using `http://localhost:8989`
+9.  `Settings -> Radarr`, using `http://localhost:7878`
+10. Open qBittorrent (`http://torrents.domain`)
+11. `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
+12. `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost` (this is for the automatic port updater script)
 
 ## qBittorrent
 
