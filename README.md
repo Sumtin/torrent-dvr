@@ -37,7 +37,7 @@ The following containers are used in this solution:
 ## Docker Compose
 
 1. Clone this repo
-2. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](ttps://github.com/Sumtin/torrent-dvaar/blob/main/docker-compose/.env.exam) file)
+2. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](ttps://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/.env.exam) file)
 3. Change working directory to `/docker-compose/`
 4. Rename `.env.example` to `.env` file and modify as needed
 6. Run `docker compose up -d`
@@ -46,15 +46,15 @@ The following containers are used in this solution:
 
 ## Portainer Stack
 
-1. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](ttps://github.com/Sumtin/torrent-dvaar/blob/main/docker-compose/.env.exam) file)
+1. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](ttps://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/.env.exam) file)
 2. Open `Portainer -> Stacks -> Add Stack`
-3. Enter a Name (i.e. `torrent-dvaar`)
+3. Enter a Name (i.e. `torrent-dv-arr`)
 4. Click `Repository`
-5. Repository URL = `https://github.com/Sumtin/torrent-dvaar/`
+5. Repository URL = `https://github.com/Sumtin/torrent-dv-arr/`
 6. Repo Reference = `refs/heads/main`
 7. Compose Path = `docker-compose/docker-compose.yml`
 8. Under Environment Variables, select `Advanced Mode`
-9. Copy entire contents of [`/docker-compose/.env.example`](https://github.com/Sumtin/torrent-dvaar/blob/main/docker-compose/.env.example) into text area.
+9. Copy entire contents of [`/docker-compose/.env.example`](https://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/.env.example) into text area.
 10. Update environment variables as needed
 11. Create the Stack
 12. Visit each HTTP endpoint and configure the apps. Recommend starting with Prowlarr.
@@ -80,7 +80,7 @@ I recommend starting with configuring Prowlarr (`http://indexers.domain`) with R
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
 
-:warning: If VPN service forwards to random port, have a look at the VPN_PORT_FORWARDING_UP_COMMAND environment variable in the [`docker-compose.yml`](https://github.com/Sumtin/torrent-dvaar/blob/main/docker-compose/docker-compose.yml).
+:warning: If VPN service forwards to random port, have a look at the VPN_PORT_FORWARDING_UP_COMMAND environment variable in the [`docker-compose.yml`](https://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/docker-compose.yml).
 
 # Notes
 
