@@ -63,7 +63,7 @@ The following containers are used in this solution:
 
 # Configuration
 
-:warning: All containers can be accessed, and can communicate with each other, over `localhost`.
+:warning: Containers can communicate with each other over `localhost`.
 
 ## Quick Start
 
