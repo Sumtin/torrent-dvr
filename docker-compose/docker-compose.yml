@@ -43,8 +43,7 @@ services:
       - 8989:8989      # Sonarr
       - 7878:7878      # Radarr
       - 6767:6767      # Bazarr
-      - 9117:9117      # Jackett
-      - 8191:8191      # Flaresolverr
+      - 9696:9696      # Prowlarr
     environment:
       - VPN_PORT_FORWARDING=${VPN_PORT_FORWARDING}
       - VPN_PORT_FORWARDING_PROVIDER=${VPN_PROVIDER}
@@ -148,45 +147,26 @@ services:
       - vpn
       - proxy
 
-  # Jackett (allows usenet bots like Sonarr and Radarr to use torrent sites) - Need to investigate Prowlarr
-  jackett:
-    image: lscr.io/linuxserver/jackett:latest
-    container_name: jackett
+  # Prowlarr - Torrent Indexer Manager - Replaces Jackett
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
     network_mode: container:vpn
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=${TIMEZONE}
-      - AUTO_UPDATE=true #optional
-      - RUN_OPTS= #optional
     volumes:
-      - ${MOUNT_TO_REMOTE_VOLUME_STORE}/${HOST_NAME}/jackett:/config
-      - ${MOUNT_TO_BTDOWNLOADS}:/downloads
+      - ${MOUNT_TO_LOCAL_VOLUME_STORE}/${HOST_NAME}/Prowlarr:/config
     labels:
       - traefik.enable=true
-      - traefik.http.services.jackett.loadbalancer.server.port=9117
-      - traefik.http.routers.jackett.rule=Host(`jackett.${DOMAIN_NAME}`)  
+      - traefik.http.services.prowlarr.loadbalancer.server.port=9696
+      - traefik.http.routers.prowlarr.rule=Host(`indexers.${DOMAIN_NAME}`)        
     restart: unless-stopped
     depends_on:
       - vpn
       - proxy
 
-  # Flaresolverr (only needed if torrent site behind CloudFlare proxy)
-  flaresolverr:
-    container_name: flaresolverr
-    image: 21hsmw/flaresolverr:nodriver
-    network_mode: container:vpn
-    environment:
-        - DRIVER=nodriver
-        - TZ=${TIMEZONE}
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.flaresolverr.loadbalancer.server.port=8191
-      - traefik.http.routers.flaresolverr.rule=Host(`flaresolverr.${DOMAIN_NAME}`)  
-    restart: unless-stopped
-    depends_on:
-      - vpn
-      - proxy
   
   # Watchtower - Auto update all containers
   watchtower:
