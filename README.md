@@ -72,6 +72,8 @@ Steps below will get the *ARR stack connected to each other. Afterwards, refer t
 6. Open Bazarr (`http://subtitles.domain`)
 7. `Settings -> Sonarr`, using `http://localhost:8989`
 8. `Settings -> Radarr`, using `http://localhost:7878`
+9. Open qBittorrent
+10. `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
 
 ## qBittorrent
 
