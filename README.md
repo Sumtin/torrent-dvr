@@ -32,6 +32,8 @@ The following containers are used in this solution:
 
 :warning: **Make sure all your mounts are properly mounted.**
 
+:warning: **DNS must be configured manually and is beyond the scope of this wiki.**
+
 ## Docker Compose
 
 1. Clone this repo
@@ -89,7 +91,6 @@ If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.co
 - All Internet-bound traffic is routed through the VPN container to ensure privacy, excluding Traefik and WatchTower.  
 - Gluetun container must expose ports for child containers.
 - Gluetun and Traefik share a bridge network as required by Traefik.
-- DNS must be configured manually and is beyond the scope of this wiki.
 
 ## Why ARR some volumes not mounted remotely?
 
