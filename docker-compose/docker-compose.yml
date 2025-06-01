@@ -16,7 +16,6 @@ services:
     # Mandatory. Must be on same network as VPN.
     networks: 
       - t3_proxy
-    # List ports for all containers
     ports:
       - 80:80          # Traefik proxy
       - 8080:8080      # Traefik Web UI, enabled by api.insecure=true
