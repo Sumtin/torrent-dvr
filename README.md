@@ -3,7 +3,7 @@
   - [Docker Compose](#docker-compose)
   - [Portainer Stack](#portainer-stack)
 - [Configuration](#configuration)
-  - [General](#general)
+  - [Quick Start](#quick-start)
   - [qBittorrent](#qbittorrent)
     - [Set Network Interface to VPN - MANDATORY](#set-network-interface-to-vpn---mandatory)
     - [Port Forwarding - OPTIONAL](#port-forwarding---optional)
@@ -63,11 +63,20 @@ The following containers are used in this solution:
 
 # Configuration
 
-## General
-
 :warning: All containers can be accessed, and can communicate with each other, over `localhost`.
 
-I recommend starting with configuring Prowlarr (`http://indexers.domain`) with Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
+## Quick Start
+
+Steps below will get the *ARR stack connected to each other. Afterwards, refer to each product's offical docs for further configurations.
+
+1. Open Prowlarr (`http://indexers.domain`)
+2. `Settings -> Indexers`, then add one or more torrent indexers
+3. `Settings -> Apps`, then add Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
+4. Open Sonarr and Radarr (`http://tv.domain`, `http://movies.domain`)
+5. For each, `Settings -> Download Clients`, add qBittorrent at `localhost` with port `5555`
+6. Open Bazarr (`http://subtitles.domain`)
+7. `Settings -> Sonarr`, using `http://localhost:8989`
+8. `Settings -> Radarr`, using `http://localhost:7878`
 
 ## qBittorrent
 
