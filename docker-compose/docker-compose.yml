@@ -51,8 +51,6 @@ services:
       - VPN_TYPE=${VPN_TYPE}
       - WIREGUARD_PRIVATE_KEY=${VPN_ACTIVATION_CODE}
       - SERVER_COUNTRIES=${VPN_COUNTRY}
-      - FIREWALL_OUTBOUND_SUBNETS=${VPN_BYPASS_LOCAL_NETWORK_CIDR}  # Allow local traffic to bypass firewall
-      - DNS_ADDRESS=127.0.0.11  # User Docker DNS (which should be using local network DNS) instead of Unbound DNS that is packaged with Gluetun
       # Command below used to update qBittorrent port (useful if VPN provider assigns random port for port forwarding)
       # Details here: https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md#qbittorrent-example
       - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://torrents.${DOMAIN_NAME}/api/v2/app/setPreferences 2>&1'
