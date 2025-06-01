@@ -11,7 +11,7 @@
 
 
 # Introduction
-Docker Compose deployment for torrent-based *ARR stack behind VPN.
+Docker Compose deployment for torrent-based *ARR stack behind VPN and Traefik reverse proxy.
 
 The following containers are used in this solution:
 
