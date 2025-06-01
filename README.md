@@ -41,8 +41,6 @@ The following containers are used in this solution:
 3. Change working directory to `/docker-compose/`
 4. Rename `.env.example` to `.env` file and modify as needed
 6. Run `docker compose up -d`
-7. Follow [Quick Start](#quick-start) guide
-8. Review [Manual qBittorrent Configurations](#manual-qbittorrent-configurations)
 
 ## Portainer Stack
 
@@ -57,9 +55,6 @@ The following containers are used in this solution:
 9. Copy entire contents of [`/docker-compose/.env.example`](https://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/.env.example) into text area.
 10. Update environment variables as needed
 11. Create the Stack
-12. Follow [Quick Start](#quick-start) guide
-13. Review [Manual qBittorrent Configurations](#manual-qbittorrent-configurations)
-
 
 # Configuration
 
