@@ -74,6 +74,7 @@ Steps below will get the *ARR stack connected to each other. Afterwards, refer t
 8. `Settings -> Radarr`, using `http://localhost:7878`
 9. Open qBittorrent
 10. `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
+11. `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost` (this is for the automatic port updater script)
 
 ## qBittorrent
 
