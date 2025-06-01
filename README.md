@@ -62,7 +62,7 @@ The following containers are used in this solution:
 
 ## Quick Start
 
-Steps below will get the *ARR stack connected to each other and torrent client. Refer to each product's offical docs for further configurations.+
+Steps below will get the *ARR stack connected to each other and torrent client. Refer to each product's offical docs for further configurations.
 
 1. Open Sonarr and Radarr (`http://tv.domain`, `http://movies.domain`)
 2. For each, `Settings -> Download Clients`, add qBittorrent at `localhost` with port `5555`
