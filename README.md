@@ -62,7 +62,7 @@ The following containers are used in this solution:
 
 ## Quick Start
 
-Steps below will get the *ARR stack connected to each other. Afterwards, refer to each product's offical docs for further configurations.
+Steps below will get the *ARR stack connected to each other. Refer to each product's offical docs for further configurations.
 
 1. Open Prowlarr (`http://indexers.domain`)
 2. `Settings -> Indexers`, then add one or more torrent indexers
