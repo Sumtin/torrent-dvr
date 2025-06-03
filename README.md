@@ -8,7 +8,7 @@
     - [Prowlarr - `http://indexers.domain`](#prowlarr---httpindexersdomain)
     - [Bazarr - `http://subtitles.domain`](#bazarr---httpsubtitlesdomain)
     - [qBittorrent - `http://torrents.domain`](#qbittorrent---httptorrentsdomain)
-      - [Port Forwarding](#port-forwarding---optional)
+      - [Port Forwarding](#port-forwardingl)
 - [Notes](#notes)
   - [Networking](#networking)
   - [Why ARR most volumes not mounted remotely?](#why-arr-most-volumes-not-mounted-remotely)
