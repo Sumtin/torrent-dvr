@@ -7,7 +7,7 @@
   - [qBittorrent Port Forwarding - OPTIONAL](#qbittorrent-port-forwarding---optional)
 - [Notes](#notes)
   - [Networking](#networking)
-  - [Why ARR some volumes not mounted remotely?](#why-arr-some-volumes-not-mounted-remotely)
+  - [Why ARR most volumes not mounted remotely?](#why-arr-most-volumes-not-mounted-remotely)
 
 
 # Introduction
