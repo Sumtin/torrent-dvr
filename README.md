@@ -94,9 +94,7 @@ If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.co
 
 If VPN service forwards to random port, check the `VPN_PORT_FORWARDING_UP_COMMAND` environment variable in [`docker-compose.yml`](https://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/docker-compose.yml).
 
-# Notes
-
-## Networking
+# Networking
 
 - Default Traefik config only supports HTTP (see [Traefik docs](https://doc.traefik.io/) for HTTPS)
 - All Internet-bound traffic is routed through the VPN container to ensure privacy, excluding Traefik and WatchTower.  
