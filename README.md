@@ -68,7 +68,7 @@ The following containers are used in this solution:
 
 Steps below will get the *ARR stack connected to each other and torrent client. Refer to each product's offical docs for further configurations.
 
-### Sonarr & Radarr - `http://tv.domain`, `http://movies.domain`
+### Sonarr & Radarr - `http://tv.domain` & `http://movies.domain`
 
 1. `Settings -> Download Clients`, add qBittorrent at `localhost` with port `5555`
 2. `Settings -> General` and scroll down til you see their API Keys. Those are needed for the Prowlarr and Bazarr configs.
