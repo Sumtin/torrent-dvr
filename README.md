@@ -86,7 +86,8 @@ Steps below will get the *ARR stack connected to each other and torrent client. 
 ### qBittorrent - `http://torrents.domain`
 
 1.  `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
-2.  `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost` (this is for the automatic port updater script, see below)
+2.  `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost`
+auto port updater. see below)
 
 #### Port Forwarding
 
