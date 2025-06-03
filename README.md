@@ -92,7 +92,7 @@ Steps below will get the *ARR stack connected to each other and torrent client. 
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
 
-If VPN service forwards to random port, check the VPN_PORT_FORWARDING_UP_COMMAND environment variable in [`docker-compose.yml`](https://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/docker-compose.yml).
+If VPN service forwards to random port, check the `VPN_PORT_FORWARDING_UP_COMMAND` environment variable in [`docker-compose.yml`](https://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/docker-compose.yml).
 
 # Notes
 
