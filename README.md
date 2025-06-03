@@ -8,7 +8,7 @@
     - [Prowlarr - `http://indexers.domain`](#prowlarr---httpindexersdomain)
     - [Bazarr - `http://subtitles.domain`](#bazarr---httpsubtitlesdomain)
     - [qBittorrent - `http://torrents.domain`](#qbittorrent---httptorrentsdomain)
-      - [qBittorrent Port Forwarding - OPTIONAL](#qbittorrent-port-forwarding---optional)
+      - [Port Forwarding - OPTIONAL](#qbittorrent-port-forwarding---optional)
 - [Notes](#notes)
   - [Networking](#networking)
   - [Why ARR most volumes not mounted remotely?](#why-arr-most-volumes-not-mounted-remotely)
@@ -88,7 +88,7 @@ Steps below will get the *ARR stack connected to each other and torrent client. 
 1.  `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
 2.  `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost` (this is for the automatic port updater script, see below)
 
-#### qBittorrent Port Forwarding - OPTIONAL
+#### Port Forwarding - OPTIONAL
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
 
