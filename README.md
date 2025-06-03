@@ -66,7 +66,7 @@ Steps below will get the *ARR stack connected to each other and torrent client. 
 
 1. Open Sonarr and Radarr (`http://tv.domain`, `http://movies.domain`)
 2. For each, `Settings -> Download Clients`, add qBittorrent at `localhost` with port `5555`
-3. For each, `Settings -> General` and make note of their respective API Keys, which are needed for the Prowlarr and Bazarr configs
+3. For each, `Settings -> General` and scroll down til you see their API Keys. Those are needed for the Prowlarr and Bazarr configs.
 4. Open Prowlarr (`http://indexers.domain`)
 5. `Settings -> Indexers`, then add one or more torrent indexers
 6. `Settings -> Apps`, then add Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
