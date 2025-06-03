@@ -4,7 +4,7 @@
   - [Portainer Stack](#portainer-stack)
 - [Configuration](#configuration)
   - [Quick Start](#quick-start)
-    - [Sonarr \& Radarr - `http://tv.domain`, `http://movies.domain`](#sonarr--radarr---httptvdomain-httpmoviesdomain)
+    - [Sonarr \& Radarr - `http://tv.domain` & `http://movies.domain`](#sonarr--radarr---httptvdomain-httpmoviesdomain)
     - [Prowlarr - `http://indexers.domain`](#prowlarr---httpindexersdomain)
     - [Bazarr - `http://subtitles.domain`](#bazarr---httpsubtitlesdomain)
     - [qBittorrent - `http://torrents.domain`](#qbittorrent---httptorrentsdomain)
