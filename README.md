@@ -4,7 +4,11 @@
   - [Portainer Stack](#portainer-stack)
 - [Configuration](#configuration)
   - [Quick Start](#quick-start)
-  - [qBittorrent Port Forwarding - OPTIONAL](#qbittorrent-port-forwarding---optional)
+    - [Sonarr \& Radarr - `http://tv.domain`, `http://movies.domain`](#sonarr--radarr---httptvdomain-httpmoviesdomain)
+    - [Prowlarr - `http://indexers.domain`](#prowlarr---httpindexersdomain)
+    - [Bazarr - `http://subtitles.domain`](#bazarr---httpsubtitlesdomain)
+    - [qBittorrent - `http://torrents.domain`](#qbittorrent---httptorrentsdomain)
+      - [qBittorrent Port Forwarding - OPTIONAL](#qbittorrent-port-forwarding---optional)
 - [Notes](#notes)
   - [Networking](#networking)
   - [Why ARR most volumes not mounted remotely?](#why-arr-most-volumes-not-mounted-remotely)
@@ -64,20 +68,27 @@ The following containers are used in this solution:
 
 Steps below will get the *ARR stack connected to each other and torrent client. Refer to each product's offical docs for further configurations.
 
-1. Open Sonarr and Radarr (`http://tv.domain`, `http://movies.domain`)
-2. For each, `Settings -> Download Clients`, add qBittorrent at `localhost` with port `5555`
-3. For each, `Settings -> General` and scroll down til you see their API Keys. Those are needed for the Prowlarr and Bazarr configs.
-4. Open Prowlarr (`http://indexers.domain`)
-5. `Settings -> Indexers`, then add one or more torrent indexers
-6. `Settings -> Apps`, then add Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
-7. Open Bazarr (`http://subtitles.domain`)
-8. `Settings -> Sonarr`, using `http://localhost:8989`
-9.  `Settings -> Radarr`, using `http://localhost:7878`
-10. Open qBittorrent (`http://torrents.domain`)
-11. `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
-12. `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost` (this is for the automatic port updater script, see below)
+### Sonarr & Radarr - `http://tv.domain`, `http://movies.domain`
 
-## qBittorrent Port Forwarding - OPTIONAL
+1. `Settings -> Download Clients`, add qBittorrent at `localhost` with port `5555`
+2. `Settings -> General` and scroll down til you see their API Keys. Those are needed for the Prowlarr and Bazarr configs.
+
+### Prowlarr - `http://indexers.domain`
+
+1. `Settings -> Indexers`, then add one or more torrent indexers
+2. `Settings -> Apps`, then add Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
+
+### Bazarr - `http://subtitles.domain`
+
+1. `Settings -> Sonarr`, using `http://localhost:8989`
+2.  `Settings -> Radarr`, using `http://localhost:7878`
+   
+### qBittorrent - `http://torrents.domain`
+
+1.  `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
+2.  `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost` (this is for the automatic port updater script, see below)
+
+#### qBittorrent Port Forwarding - OPTIONAL
 
 If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md) for enabling in qBitorrent.
 
