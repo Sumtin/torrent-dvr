@@ -23,7 +23,7 @@ The following containers are used in this solution:
 |---|:---:|---|:---:|---|---|
 |Gluetun|N/A|N/A|N/A|VPN|https://github.com/qdm12/gluetun-wiki|
 |Traefik Dashboard|No|http://domain:8080|8080|Reverse Proxy|https://doc.traefik.io/|
-|WatchTower|No|N/A|N/A|Container Updates|https://github.com/containrrr/watchtower| 
+|WatchTower|No|N/A|N/A|Updater|https://github.com/containrrr/watchtower| 
 |qBittorrent|Yes|http://torrents.domain|5555|Bittorrent client|https://github.com/qbittorrent/qBittorrent/wiki|
 |Radarr|Yes|http://movies.domain|7878|Monitors Movies|https://wiki.servarr.com/radarr|
 |Sonarr|Yes|http://tv.domain|8989|Monitors TV|https://wiki.servarr.com/en/sonarr|
