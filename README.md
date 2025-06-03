@@ -28,7 +28,7 @@ The following containers are used in this solution:
 |Radarr|Yes|http://movies.domain|7878|Monitors Movies|https://wiki.servarr.com/radarr|
 |Sonarr|Yes|http://tv.domain|8989|Monitors TV|https://wiki.servarr.com/en/sonarr|
 |Bazarr|Yes|http://subtitles.domain|6767|Manages subtitles|https://www.bazarr.media/|
-|Prowlarr|Yes|http://indexers.domain|9117|Torrent indexer managager |https://wiki.servarr.com/en/prowlarr|
+|Prowlarr|Yes|http://indexers.domain|9117|Torrent indexer manager |https://wiki.servarr.com/en/prowlarr|
 
 # Installation
 
