@@ -75,8 +75,8 @@ Steps below will get the *ARR stack connected to each other and torrent client. 
 
 ### Prowlarr - `http://indexers.domain`
 
-1. `Settings -> Indexers`, then add one or more torrent indexers
-2. `Settings -> Apps`, then add Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
+1. `Settings -> Indexers`, add one or more torrent indexers
+2. `Settings -> Apps`, add Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
 
 ### Bazarr - `http://subtitles.domain`
 
