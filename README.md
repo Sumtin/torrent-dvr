@@ -92,7 +92,7 @@ If you're using VPN Port Forwarding, follow [the Gluetun wiki](https://github.co
 - Gluetun container must expose ports for child containers.
 - Gluetun and Traefik share a bridge network as required by Traefik.
 
-## Why ARR some volumes not mounted remotely?
+## Why ARR most volumes not mounted remotely?
 
 Sonarr, Radarr, Prowlarr, and Bazarr all use SQLite and it doesn't play nice when accessed over a network. 
 https://access.redhat.com/solutions/120733
