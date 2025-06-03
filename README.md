@@ -97,7 +97,7 @@ If VPN service forwards to random port, check the `VPN_PORT_FORWARDING_UP_COMMAN
 # Networking
 
 - Default Traefik config only supports HTTP (see [Traefik docs](https://doc.traefik.io/) for HTTPS)
-- All Internet-bound traffic is routed through the VPN container to ensure privacy, excluding Traefik and WatchTower.  
+- All Internet-bound traffic is routed through the VPN container to ensure privacy, excluding WatchTower.  
 - Gluetun container must expose ports for child containers.
 - Gluetun and Traefik share a bridge network as required by Traefik.
 
