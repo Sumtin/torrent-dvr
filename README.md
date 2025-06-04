@@ -4,13 +4,12 @@
   - [Portainer Stack](#portainer-stack)
 - [Configuration](#configuration)
   - [Quick Start](#quick-start)
-    - [Sonarr \& Radarr - `http://tv.domain` & `http://movies.domain`](#sonarr--radarr---httptvdomain-httpmoviesdomain)
-    - [Prowlarr - `http://indexers.domain`](#prowlarr---httpindexersdomain)
-    - [Bazarr - `http://subtitles.domain`](#bazarr---httpsubtitlesdomain)
-    - [qBittorrent - `http://torrents.domain`](#qbittorrent---httptorrentsdomain)
+    - [Sonarr, Radarr - http://tv.domain, http://movies.domain](#sonarr-radarr---httptvdomain-httpmoviesdomain)
+    - [Prowlarr - http://indexers.domain](#prowlarr---httpindexersdomain)
+    - [Bazarr - http://subtitles.domain](#bazarr---httpsubtitlesdomain)
+    - [qBittorrent - http://torrents.domain](#qbittorrent---httptorrentsdomain)
       - [Port Forwarding](#port-forwarding)
-- [Notes](#notes)
-  - [Networking](#networking)
+- [Networking](#networking)
   - [Why ARR most volumes not mounted remotely?](#why-arr-most-volumes-not-mounted-remotely)
 
 
@@ -41,14 +40,14 @@ The following containers are used in this solution:
 ## Docker Compose
 
 1. Clone this repo
-2. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](ttps://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/.env.exam) file)
+2. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](https://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/.env.example) file)
 3. Change working directory to `/docker-compose/`
 4. Rename `.env.example` to `.env` file and modify as needed
 6. Run `docker compose up -d`
 
 ## Portainer Stack
 
-1. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](ttps://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/.env.exam) file)
+1. Create mounts! (See `MOUNT_TO_...` configs in [`.env.example`](https://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/.env.example) file)
 2. Open `Portainer -> Stacks -> Add Stack`
 3. Enter a Name (i.e. `torrent-dv-arr`)
 4. Click `Repository`
@@ -57,7 +56,7 @@ The following containers are used in this solution:
 7. Compose Path = `docker-compose/docker-compose.yml`
 8. Under Environment Variables, select `Advanced Mode`
 9. Copy entire contents of [`/docker-compose/.env.example`](https://github.com/Sumtin/torrent-dv-arr/blob/main/docker-compose/.env.example) into text area.
-10. Update environment variables as needed
+10. Update environment variables
 11. Create the Stack
 
 # Configuration
@@ -68,22 +67,22 @@ The following containers are used in this solution:
 
 Steps below will get the *ARR stack connected to each other and torrent client. Refer to each product's offical docs for further configurations.
 
-### Sonarr & Radarr - `http://tv.domain` & `http://movies.domain`
+### Sonarr, Radarr - http://tv.domain, http://movies.domain
 
 1. `Settings -> Download Clients`, add qBittorrent at `localhost` with port `5555`
 2. `Settings -> General` and scroll down til you see their API Keys. Those are needed for the Prowlarr and Bazarr configs.
 
-### Prowlarr - `http://indexers.domain`
+### Prowlarr - http://indexers.domain
 
 1. `Settings -> Indexers`, add one or more torrent indexers
 2. `Settings -> Apps`, add Radarr and Sonarr using `http://localhost:7878` and `http://localhost:8989`, respectively.
 
-### Bazarr - `http://subtitles.domain`
+### Bazarr - http://subtitles.domain
 
 1. `Settings -> Sonarr`, using `http://localhost:8989`
 2.  `Settings -> Radarr`, using `http://localhost:7878`
    
-### qBittorrent - `http://torrents.domain`
+### qBittorrent - http://torrents.domain
 
 1.  `Tools -> Options -> Advanced`, then change `Network interface` to `tun0`
 2.  `Tools -> Options -> WebUI` and select `Bypass authentication for clients on localhost`
