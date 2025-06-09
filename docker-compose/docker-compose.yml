@@ -21,7 +21,7 @@ services:
       - 8080:8080      # Traefik Web UI, enabled by api.insecure=true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: unless-stopped
+    restart: always
 
   # VPN - Gluetun
   vpn:
@@ -53,7 +53,7 @@ services:
       # Command below used to update qBittorrent port (useful if VPN provider assigns random port for port forwarding)
       # Details here: https://github.com/qdm12/gluetun-wiki/blob/main/setup/advanced/vpn-port-forwarding.md#qbittorrent-example
       - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://localhost:5555/api/v2/app/setPreferences 2>&1'
-    restart: unless-stopped   
+    restart: always   
 
   # qBittorrent (routes through VPN)
   torrent:
@@ -72,7 +72,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.torrent.loadbalancer.server.port=5555
       - traefik.http.routers.torrent.rule=Host(`torrents.${DOMAIN_NAME}`)  
-    restart: unless-stopped    
+    restart: always    
     depends_on:
       - vpn
       - proxy
@@ -94,7 +94,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
       - traefik.http.routers.sonarr.rule=Host(`tv.${DOMAIN_NAME}`)  
-    restart: unless-stopped
+    restart: always
     depends_on:
       - proxy
       - vpn
@@ -116,7 +116,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.radarr.loadbalancer.server.port=7878
       - traefik.http.routers.radarr.rule=Host(`movies.${DOMAIN_NAME}`)  
-    restart: unless-stopped
+    restart: always
     depends_on:
       - vpn
       - proxy
@@ -138,7 +138,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.bazarr.loadbalancer.server.port=6767
       - traefik.http.routers.bazarr.rule=Host(`subtitles.${DOMAIN_NAME}`)  
-    restart: unless-stopped
+    restart: always
     depends_on:
       - vpn
       - proxy
@@ -158,7 +158,7 @@ services:
       - traefik.enable=true
       - traefik.http.services.prowlarr.loadbalancer.server.port=9696
       - traefik.http.routers.prowlarr.rule=Host(`indexers.${DOMAIN_NAME}`)        
-    restart: unless-stopped
+    restart: always
     depends_on:
       - vpn
       - proxy
@@ -173,13 +173,13 @@ services:
       - 'WATCHTOWER_NOTIFICATION_URL=${SHOUTRR_SERVICE_URL}'
       - 'WATCHTOWER_NOTIFICATION_TEMPLATE={{range .}}{{.Time.Format \2006-01-02'
     image: containrrr/watchtower
-    restart: unless-stopped
+    restart: always
 
   # Popular Auto-Downloader (IRC/RSS monitor)
   # autobrr:
   #   container_name: autobrr
   #   image: ghcr.io/autobrr/autobrr:latest
-  #   restart: unless-stopped
+  #   restart: always
   #   logging:
   #    driver: json-file
   #    options:
